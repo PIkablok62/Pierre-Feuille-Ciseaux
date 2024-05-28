@@ -1,0 +1,49 @@
+@startuml
+enum Action {
+    PIERRE
+    PAPIER
+    CISEAUX
+}
+
+interface Joueur {
+    + choisirAction(): Action
+}
+
+abstract class JoueurAbstrait {
+    - nom: String
+    --
+    + choisirAction(): Action
+    + obtenirNom(): String
+}
+
+class JoueurHumain {
+    + choisirAction(): Action
+}
+
+class JoueurOrdinateur {
+    + choisirAction(): Action
+}
+
+class Partie {
+    - joueur1: Joueur
+    - joueur2: Joueur
+    --
+    + jouerPartie(): void
+}
+
+class Jeu {
+    + demarrerJeu(): void
+    + afficherScores(): void
+    + demanderContinuer(): boolean
+}
+
+Action --> Partie
+Joueur <|.. JoueurHumain
+Joueur <|.. JoueurOrdinateur
+Joueur <|-- JoueurAbstrait
+JoueurAbstrait <|-- JoueurHumain
+JoueurAbstrait <|-- JoueurOrdinateur
+Partie o-- Joueur
+Partie -- Jeu
+
+@enduml
